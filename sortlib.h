@@ -24,7 +24,34 @@ namespace sortlib {
     template <typename T>
     void merge_sort(vector<T>& arr);
     template <typename T>
-    void quick_sort(vector<T>& arr, int left, int right);
+    void quick_sort(vector<T>& arr);
+}
+
+//-------------------------------------------Implementation of generating random arrays with random variables-------------------------------------------
+template <typename T>
+T random_int(T min, T max)
+{
+    mt19937 rng(random_device{}());
+    uniform_int_distribution<T> dist(min, max);
+    return dist(rng);
+}
+template <typename T>
+vector<T> generate_random_vector(T n)
+{
+    vector<T> v(n);
+    generate(v.begin(), v.end(), [](){ return random_int(0, 100); });
+    return v;
+}
+//-------------------------------------------Implementation of calculating the time of sorting-------------------------------------------
+
+
+template <typename T>
+void measure_time_of_sort(void (*sort_func)(vector<T>&), vector<T>& arr) {
+    auto start_time = chrono::high_resolution_clock::now();
+    sort_func(arr);
+    auto end_time = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(end_time - start_time).count();
+    cout << "Sorting time: " << duration << " microseconds" << endl;
 }
 //------------------------------------------------------------Implementation of Merge sort------------------------------------------------------------
 template <typename T>
@@ -87,32 +114,34 @@ void print(vector<T> arr){
     }
     cout <<  endl;
 }
-//-------------------------------------------Implementation of generating random arrays with random variables-------------------------------------------
-template <typename T>
-T random_int(T min, T max)
-{
-    mt19937 rng(random_device{}());
-    uniform_int_distribution<T> dist(min, max);
-    return dist(rng);
-}
-template <typename T>
-vector<T> generate_random_vector(T n)
-{
-    vector<T> v(n);
-    generate(v.begin(), v.end(), [](){ return random_int(0, 100); });
-    return v;
-}
-//-------------------------------------------Implementation of calculating the time of sorting-------------------------------------------
 
+
+//----------------------------------------------------------Implementation of quick sort----------------------------------------------------------
 
 template <typename T>
-void measure_time_of_sort(void (*sort_func)(vector<T>&), vector<T>& arr) {
-    auto start_time = chrono::high_resolution_clock::now();
-    sort_func(arr);
-    auto end_time = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::microseconds>(end_time - start_time).count();
-    cout << "Sorting time: " << duration << " microseconds" << endl;
+T partition(vector<T>& arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i+1], arr[high]);
+    return i + 1;
 }
+template <typename T>
+void quick_sort_helper(vector<T>& arr, int low, int high) {
+    if (low < high) {
+        int pivot_idx = partition(arr, low, high);
+        quick_sort_helper(arr, low, pivot_idx - 1);
+        quick_sort_helper(arr, pivot_idx + 1, high);
+    }
 
-
+}
+template <typename T>
+void quick_sort( vector<T>& arr) {
+    quick_sort_helper(arr, 0, arr.size() - 1);
+}
 #endif //PROGRAM_SORTLIB_H
