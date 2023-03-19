@@ -12,19 +12,20 @@ using namespace std;
 namespace sortlib {
     vector<int> generate_random_vector(int n);
     int random_int(int min, int max);
+    void Swap(int&x, int&y);
     template <typename T>
     void measure_time_of_sort(void (*sort_func)(vector<T>&), vector<T>& arr) ;
     void generate_random_array_of_size_n();
     template <typename T>
-    void bubble_sort(vector<T>& arr);
+    void bubble_sort(T arr[], int n);
     template <typename T>
-    void selection_sort(vector<T>& arr);
+    void selection_sort(T arr[], int n);
     template <typename T>
-    void insertion_sort(vector<T>& arr);
+    void insertion_sort(T arr[] , int n);
     template <typename T>
-    void merge_sort(vector<T>& arr);
+    void merge_sort(T arr[], int n);
     template <typename T>
-    void quick_sort(vector<T>& arr);
+    void quick_sort(T arr[], int n);
 }
 
 //-------------------------------------------Implementation of generating random arrays with random variables-------------------------------------------
@@ -55,7 +56,7 @@ void measure_time_of_sort(void (*sort_func)(vector<T>&), vector<T>& arr) {
 }
 //------------------------------------------------------------Implementation of Merge sort------------------------------------------------------------
 template <typename T>
-void merge(vector<T>& arr, int left, int mid, int right) {
+void merge(T arr[], int left, int mid, int right) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
 
@@ -95,7 +96,7 @@ void merge(vector<T>& arr, int left, int mid, int right) {
     }
 }
 template <typename T>
-void merge_sort_helper( vector<T>& arr, int left, int right) {
+void merge_sort_helper(T arr[], int left, int right) {
     if (left < right) {
         int mid = left + (right - left) / 2;
         merge_sort_helper(arr, left, mid);
@@ -104,11 +105,11 @@ void merge_sort_helper( vector<T>& arr, int left, int right) {
     }
 }
 template <typename T>
-void merge_sort( vector<T>& arr) {
-    merge_sort_helper(arr, 0, arr.size() - 1);
+void merge_sort( T arr[], int n) {
+    merge_sort_helper(arr, 0, n - 1);
 }
 template <typename T>
-void print(vector<T> arr){
+void print(T arr[]){
     for (auto num : arr) {
         cout << num << " ";
     }
@@ -119,7 +120,7 @@ void print(vector<T> arr){
 //----------------------------------------------------------Implementation of quick sort----------------------------------------------------------
 
 template <typename T>
-T partition(vector<T>& arr, int low, int high) {
+T partition(T arr[], int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
     for (int j = low; j <= high - 1; j++) {
@@ -132,7 +133,7 @@ T partition(vector<T>& arr, int low, int high) {
     return i + 1;
 }
 template <typename T>
-void quick_sort_helper(vector<T>& arr, int low, int high) {
+void quick_sort_helper(T arr[], int low, int high) {
     if (low < high) {
         int pivot_idx = partition(arr, low, high);
         quick_sort_helper(arr, low, pivot_idx - 1);
@@ -141,7 +142,74 @@ void quick_sort_helper(vector<T>& arr, int low, int high) {
 
 }
 template <typename T>
-void quick_sort( vector<T>& arr) {
-    quick_sort_helper(arr, 0, arr.size() - 1);
+void quick_sort(T arr[], int n) {
+    quick_sort_helper(arr, 0, n - 1);
 }
+
+//------------------------------------------------------Implementation of insertion sort -------------------------------------------------
+template <typename T>
+void insertion_sort(T arr[], int n){
+    int key, j;
+    for (int i = 1; i < n ; i++)
+    {
+        key = arr[i];
+        j= i-1;
+        while (j >= 0 && arr[j] > key)
+        {
+            arr[j+1] = arr[j];
+            j = j - 1;
+        }
+        arr[j+1] = key;         
+    }
+}
+
+//------------------------------------------------------Swap function for positions------------------------------------------------
+void Swap(int&x, int&y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}   
+
+//------------------------------------------------------Implementation of selection sort ------------------------------------------------
+template <typename T>
+void selection_sort(T arr[], int n){
+    
+    int i , j, min;
+    for(i = 0; i < n; i++)
+    {
+        min = i;
+        for(j = i+1; j < n; j++)
+            if (arr[j] < arr[min])
+                min = j;
+        Swap(arr[i] , arr[min]);
+    }
+}
+
+
+//------------------------------------------------------Implementation of Bubble sort ------------------------------------------------
+template <typename T>
+void bubble_sort(T arr[], int n){
+    bool flag; //if true, array is sorted
+    for (int i = 0; i < n-1; i++)
+    {
+        for (int j = 0; j < n-i-1; j++)
+        {
+            if(arr[j] > arr[j+1]){
+                Swap(arr[j], arr[j+1]);
+                flag= false;
+            }
+        }
+        if(flag == true){
+            break;
+        }
+        
+    }
+    
+}
+
+
+
+
+
+
 #endif //PROGRAM_SORTLIB_H
