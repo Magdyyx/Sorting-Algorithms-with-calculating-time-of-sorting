@@ -9,13 +9,14 @@ using namespace std;
 #include <random>
 #include <algorithm>
 #include <chrono>
+#include <cstdlib>
+#include <ctime>
 namespace sortlib {
-    vector<int> generate_random_vector(int n);
-    int random_int(int min, int max);
+    template <typename T>
+    T *generateRandomArray(T n);
     void Swap(int&x, int&y);
     template <typename T>
-    void measure_time_of_sort(void (*sort_func)(vector<T>&), vector<T>& arr) ;
-    void generate_random_array_of_size_n();
+    void measure_time_of_sort(void (*sort_func)(T arr[]), T arr[]) ;
     template <typename T>
     void bubble_sort(T arr[], int n);
     template <typename T>
@@ -26,30 +27,26 @@ namespace sortlib {
     void merge_sort(T arr[], int n);
     template <typename T>
     void quick_sort(T arr[], int n);
+    
 }
 
 //-------------------------------------------Implementation of generating random arrays with random variables-------------------------------------------
 template <typename T>
-T random_int(T min, T max)
-{
-    mt19937 rng(random_device{}());
-    uniform_int_distribution<T> dist(min, max);
-    return dist(rng);
-}
-template <typename T>
-vector<T> generate_random_vector(T n)
-{
-    vector<T> v(n);
-    generate(v.begin(), v.end(), [](){ return random_int(0, 100); });
-    return v;
+T* generateRandomArray(T n) {
+    T* arr = new T[n];
+    srand(time(NULL)); // Seed the random number generator with current time
+    
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand() % 100; // Generate random number between 0 and 99
+    }
+    
+    return arr;
 }
 //-------------------------------------------Implementation of calculating the time of sorting-------------------------------------------
-
-
 template <typename T>
-void measure_time_of_sort(void (*sort_func)(vector<T>&), vector<T>& arr) {
+void measure_time_of_sort(void (*sort_func)(), T arr[], T n) {
     auto start_time = chrono::high_resolution_clock::now();
-    sort_func(arr);
+    sort_func(arr,n);
     auto end_time = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(end_time - start_time).count();
     cout << "Sorting time: " << duration << " microseconds" << endl;
@@ -109,10 +106,12 @@ void merge_sort( T arr[], int n) {
     merge_sort_helper(arr, 0, n - 1);
 }
 template <typename T>
-void print(T arr[]){
-    for (auto num : arr) {
-        cout << num << " ";
+void print(T arr[], int n){
+    for (size_t i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
     }
+    
     cout <<  endl;
 }
 
@@ -206,6 +205,8 @@ void bubble_sort(T arr[], int n){
     }
     
 }
+
+
 
 
 
