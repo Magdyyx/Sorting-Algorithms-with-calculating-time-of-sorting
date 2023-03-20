@@ -25,6 +25,8 @@ namespace sortlib {
     void merge_sort(vector<T>& arr);
     template <typename T>
     void quick_sort(vector<T>& arr);
+    template <typename T>
+    void shellSort(T arr[])
 }
 
 //-------------------------------------------Implementation of generating random arrays with random variables-------------------------------------------
@@ -143,5 +145,21 @@ void quick_sort_helper(vector<T>& arr, int low, int high) {
 template <typename T>
 void quick_sort( vector<T>& arr) {
     quick_sort_helper(arr, 0, arr.size() - 1);
+}
+
+template <typename T>
+void shellSort(T arr[])
+{
+    int size{sizeof(arr) / sizeof(arr[0])};
+    int gap{size / 2};
+
+    for (gap; gap > 0; gap--)
+    {
+        for (int i{}; i + gap < size; i++)
+        {
+            if (arr[i] > arr[i + gap])
+                swap(arr[i], arr[i + gap]);
+        }
+    }
 }
 #endif //PROGRAM_SORTLIB_H
