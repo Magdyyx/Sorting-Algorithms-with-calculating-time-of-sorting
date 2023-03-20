@@ -24,10 +24,16 @@ namespace sortlib {
     template <typename T>
     void insertion_sort(T arr[] , int n);
     template <typename T>
+<<<<<<< HEAD
     void merge_sort(T arr[], int n);
     template <typename T>
     void quick_sort(T arr[], int n);
     
+=======
+    void quick_sort(vector<T>& arr);
+    template <typename T>
+    void shellSort(T arr[])
+>>>>>>> b8080b8b388663ac6506f0aa0977791de53071ce
 }
 
 //-------------------------------------------Implementation of generating random arrays with random variables-------------------------------------------
@@ -145,6 +151,7 @@ void quick_sort(T arr[], int n) {
     quick_sort_helper(arr, 0, n - 1);
 }
 
+<<<<<<< HEAD
 //------------------------------------------------------Implementation of insertion sort -------------------------------------------------
 template <typename T>
 void insertion_sort(T arr[], int n){
@@ -213,4 +220,21 @@ void bubble_sort(T arr[], int n){
 
 
 
+=======
+template <typename T>
+void shellSort(T arr[])
+{
+    int size{sizeof(arr) / sizeof(arr[0])};
+    int gap{size / 2};
+
+    for (gap; gap > 0; gap--)
+    {
+        for (int i{}; i + gap < size; i++)
+        {
+            if (arr[i] > arr[i + gap])
+                swap(arr[i], arr[i + gap]);
+        }
+    }
+}
+>>>>>>> b8080b8b388663ac6506f0aa0977791de53071ce
 #endif //PROGRAM_SORTLIB_H
