@@ -16,24 +16,16 @@ namespace sortlib {
     T *generateRandomArray(T n);
     void Swap(int&x, int&y);
     template <typename T>
-    void measure_time_of_sort(void (*sort_func)(T arr[]), T arr[]) ;
-    template <typename T>
     void bubble_sort(T arr[], int n);
     template <typename T>
     void selection_sort(T arr[], int n);
     template <typename T>
     void insertion_sort(T arr[] , int n);
     template <typename T>
-<<<<<<< HEAD
     void merge_sort(T arr[], int n);
     template <typename T>
     void quick_sort(T arr[], int n);
     
-=======
-    void quick_sort(vector<T>& arr);
-    template <typename T>
-    void shellSort(T arr[])
->>>>>>> b8080b8b388663ac6506f0aa0977791de53071ce
 }
 
 //-------------------------------------------Implementation of generating random arrays with random variables-------------------------------------------
@@ -47,15 +39,6 @@ T* generateRandomArray(T n) {
     }
     
     return arr;
-}
-//-------------------------------------------Implementation of calculating the time of sorting-------------------------------------------
-template <typename T>
-void measure_time_of_sort(void (*sort_func)(), T arr[], T n) {
-    auto start_time = chrono::high_resolution_clock::now();
-    sort_func(arr,n);
-    auto end_time = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::microseconds>(end_time - start_time).count();
-    cout << "Sorting time: " << duration << " microseconds" << endl;
 }
 //------------------------------------------------------------Implementation of Merge sort------------------------------------------------------------
 template <typename T>
@@ -151,7 +134,6 @@ void quick_sort(T arr[], int n) {
     quick_sort_helper(arr, 0, n - 1);
 }
 
-<<<<<<< HEAD
 //------------------------------------------------------Implementation of insertion sort -------------------------------------------------
 template <typename T>
 void insertion_sort(T arr[], int n){
@@ -220,21 +202,4 @@ void bubble_sort(T arr[], int n){
 
 
 
-=======
-template <typename T>
-void shellSort(T arr[])
-{
-    int size{sizeof(arr) / sizeof(arr[0])};
-    int gap{size / 2};
-
-    for (gap; gap > 0; gap--)
-    {
-        for (int i{}; i + gap < size; i++)
-        {
-            if (arr[i] > arr[i + gap])
-                swap(arr[i], arr[i + gap]);
-        }
-    }
-}
->>>>>>> b8080b8b388663ac6506f0aa0977791de53071ce
 #endif //PROGRAM_SORTLIB_H
