@@ -28,6 +28,10 @@ namespace sortlib {
     void merge_sort(T arr[], int n);
     template <typename T>
     void quick_sort(T arr[], int n);
+    template <typename T>
+    void shellSort(T arr[], const int size);
+    template <typename T>
+    void countSort(T arr[], const int size);
     
 }
 
@@ -207,10 +211,18 @@ void bubble_sort(T arr[], int n){
     
 }
 
+//------------------------------------------------------------Implementation of Shell sort------------------------------------------------------------
 
+template <class T>
+void shellSort(T arr[], const int size)
+{
+    int gap{size / 2};
 
-
-
+    for (gap; gap > 0; gap--)
+        for (int i{}; i + gap < size; i++)
+            if (arr[i] > arr[i + gap])
+                swap(arr[i], arr[i + gap]);
+}
 
 
 
