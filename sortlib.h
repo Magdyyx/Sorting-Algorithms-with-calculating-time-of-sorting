@@ -14,6 +14,9 @@ using namespace std;
 namespace sortlib {
     template <typename T>
     T *generateRandomArray(T n);
+    template<typename T>
+    void measure_time_of_sort(void (*sort_func)(T[], int), T arr[], int n);
+
     void Swap(int&x, int&y);
     template <typename T>
     void bubble_sort(T arr[], int n);
@@ -39,6 +42,15 @@ T* generateRandomArray(T n) {
     }
     
     return arr;
+}
+//-------------------------------------------Implementation of Calculating time of sorts-------------------------------------------
+template<typename T>
+void measure_time_of_sort(void (*sort_func)(T[], int), T arr[], int n) {
+    auto start_time = chrono::high_resolution_clock::now();
+    sort_func(arr, n);
+    auto end_time = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count();
+    cout << "Sorting time: " << duration << " microseconds" << endl;
 }
 //------------------------------------------------------------Implementation of Merge sort------------------------------------------------------------
 template <typename T>

@@ -13,7 +13,7 @@ int main() {
     int *arr7 = generateRandomArray(50000);
 
     // ------------------------------------------------------------Applying Merge sort------------------------------------------------------------
-//    merge_sort(arr1,200); 
+//    merge_sort(arr1,200);
 //    merge_sort(arr2,500);
 //    merge_sort(arr3, 500);
 //    merge_sort(arr4, 1000);
@@ -21,8 +21,9 @@ int main() {
 //    merge_sort(arr6, 10000);
 //    merge_sort(arr7, 20000);
 //    merge_sort(arr7, 50000);
-
-    // print (arr2, 500);
+//
+//     cout<<"Applying Merge sort on Arr2 with size 500"<<endl;
+//     print (arr2, 500);
 
 
     // ------------------------------------------------------------Applying Quick sort------------------------------------------------------------
@@ -34,6 +35,8 @@ int main() {
 //    quick_sort(arr6, 10000);
 //    quick_sort(arr7, 20000);
 //    quick_sort(arr7, 50000);
+//     cout<<"Applying Quick sort on Arr2 with size 500"<<endl;
+//     print (arr2, 500);
 
 
     //----------------------------------------------------------------Applying Insertion sort------------------------------------------------
@@ -46,6 +49,8 @@ int main() {
 //    insertion_sort(arr6, 10000);
 //    insertion_sort(arr7, 20000);
 //    insertion_sort(arr7, 50000);
+//     cout<<"Applying Insertion sort on Arr2 with size 500"<<endl;
+//     print (arr2, 500);
 
 
     //----------------------------------------------------------------Applying Selection sort------------------------------------------------
@@ -58,6 +63,8 @@ int main() {
 //    selection_sort(arr6, 10000);
 //    selection_sort(arr7, 20000);
 //    selection_sort(arr7, 50000);
+//     cout<<"Applying Selection sort on Arr2 with size 500"<<endl;
+//     print (arr2, 500);
 
 
     //----------------------------------------------------------------Applying Bubble sort------------------------------------------------
@@ -69,56 +76,19 @@ int main() {
 //    bubble_sort(arr6, 10000);
 //    bubble_sort(arr7, 20000);
 //    bubble_sort(arr7, 50000);
-    // print (arr1,200);
+//     cout<<"Applying Bubble sort on Arr2 with size 500"<<endl;
+//     print (arr2, 500);
 
 
 
+    measure_time_of_sort(quick_sort, arr1, 200);
+    measure_time_of_sort(quick_sort, arr2, 500);
+    measure_time_of_sort(quick_sort, arr3, 1000);
+    measure_time_of_sort(quick_sort, arr4, 5000);
+    measure_time_of_sort(quick_sort, arr5, 10000);
+    measure_time_of_sort(quick_sort, arr6, 20000);
+    measure_time_of_sort(quick_sort, arr7, 50000);
 
-
-
-
-
-    auto start_time = chrono::high_resolution_clock::now();
-    selection_sort(arr1,200);
-    auto end_time = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::milliseconds>(end_time - start_time);
-    cout << "Sorting time: " << duration.count() << " milliseconds" << endl;
-
-    auto start_time2 = chrono::high_resolution_clock::now();
-    selection_sort(arr2,500);
-    auto end_time2 = chrono::high_resolution_clock::now();
-    auto duration2 = chrono::duration_cast<chrono::milliseconds>(end_time2 - start_time2);
-    cout << "Sorting time: " << duration2.count() << " milliseconds" << endl;
-
-    auto start_time3 = chrono::high_resolution_clock::now();
-    selection_sort(arr3,1000);
-    auto end_time3 = chrono::high_resolution_clock::now();
-    auto duration3 = chrono::duration_cast<chrono::milliseconds>(end_time3 - start_time3);
-    cout << "Sorting time: " << duration3.count() << " milliseconds" << endl;
-
-    auto start_time4 = chrono::high_resolution_clock::now();
-    selection_sort(arr4,5000);
-    auto end_time4 = chrono::high_resolution_clock::now();
-    auto duration4 = chrono::duration_cast<chrono::milliseconds>(end_time4 - start_time4);
-    cout << "Sorting time: " << duration4.count() << " milliseconds" << endl;
-
-    auto start_time5 = chrono::high_resolution_clock::now();
-    selection_sort(arr5,10000);
-    auto end_time5 = chrono::high_resolution_clock::now();
-    auto duration5 = chrono::duration_cast<chrono::milliseconds>(end_time5 - start_time5);
-    cout << "Sorting time: " << duration5.count() << " milliseconds" << endl;
-
-    auto start_time6 = chrono::high_resolution_clock::now();
-    selection_sort(arr6,20000);
-    auto end_time6 = chrono::high_resolution_clock::now();
-    auto duration6 = chrono::duration_cast<chrono::milliseconds>(end_time6 - start_time6);
-    cout << "Sorting time: " << duration6.count() << " milliseconds" << endl;
-    
-    auto start_time7 = chrono::high_resolution_clock::now();
-    selection_sort(arr7,50000);
-    auto end_time7 = chrono::high_resolution_clock::now();
-    auto duration7 = chrono::duration_cast<chrono::milliseconds>(end_time7 - start_time7);
-    cout << "Sorting time: " << duration7.count() << " milliseconds" << endl;
 
 
 
