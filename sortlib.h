@@ -224,6 +224,42 @@ void shellSort(T arr[], const int size)
                 swap(arr[i], arr[i + gap]);
 }
 
+//------------------------------------------------------------Implementation of Count sort------------------------------------------------------------
+
+template <class T>
+void countSort(T arr[], const int size)
+{
+    int max = arr[0];
+
+    for (int i{1}; i < size; i++)
+        if (arr[i] > max)
+            max = arr[i];
+    max++;
+    int frequency[max];
+
+    for (int i{}; i < max; i++)
+        frequency[i] = 0;
+
+    for (int i{}; i < size; i++)
+        frequency[arr[i]]++;
+
+    int x{};
+
+    while (x <= size)
+        for (int i{}; i < max; i++)
+        {
+            for (int j{}; j < frequency[i]; j++)
+            {
+                arr[x] = i;
+                x++;
+            }
+
+            if (x > size)
+                break;
+        }
+}
+
+
 
 
 #endif //PROGRAM_SORTLIB_H
