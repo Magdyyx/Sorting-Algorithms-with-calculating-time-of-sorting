@@ -81,13 +81,13 @@ int main() {
 
 
 
-    measure_time_of_sort(quick_sort, arr1, 200);
-    measure_time_of_sort(quick_sort, arr2, 500);
-    measure_time_of_sort(quick_sort, arr3, 1000);
-    measure_time_of_sort(quick_sort, arr4, 5000);
-    measure_time_of_sort(quick_sort, arr5, 10000);
-    measure_time_of_sort(quick_sort, arr6, 20000);
-    measure_time_of_sort(quick_sort, arr7, 50000);
+    measure_time_of_sort(merge_sort, arr1, 200);
+    measure_time_of_sort(merge_sort, arr2, 500);
+    measure_time_of_sort(merge_sort, arr3, 1000);
+    measure_time_of_sort(merge_sort, arr4, 5000);
+    measure_time_of_sort(merge_sort, arr5, 10000);
+    measure_time_of_sort(merge_sort, arr6, 20000);
+    measure_time_of_sort(merge_sort, arr7, 50000);
 
 
 
