@@ -19,15 +19,15 @@ namespace sortlib {
 
     void Swap(int&x, int&y);
     template <typename T>
-    void bubble_sort(T arr[], int n);
+    void bubble_sort(T arr[], const int n);
     template <typename T>
-    void selection_sort(T arr[], int n);
+    void selection_sort(T arr[], const int n);
     template <typename T>
-    void insertion_sort(T arr[] , int n);
+    void insertion_sort(T arr[] , const int n);
     template <typename T>
-    void merge_sort(T arr[], int n);
+    void merge_sort(T arr[], const int n);
     template <typename T>
-    void quick_sort(T arr[], int n);
+    void quick_sort(T arr[], const int n);
     template <typename T>
     void shellSort(T arr[], const int size);
     template <typename T>
@@ -54,7 +54,7 @@ void measure_time_of_sort(void (*sort_func)(T[], int), T arr[], int n) {
     sort_func(arr, n);
     auto end_time = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end_time - start_time).count();
-    cout << "Sorting time: " << duration << " microseconds" << endl;
+    cout << "Sorting time: " << duration << " milliseconds" << endl;
 }
 //------------------------------------------------------------Implementation of Merge sort------------------------------------------------------------
 template <typename T>
@@ -107,7 +107,7 @@ void merge_sort_helper(T arr[], int left, int right) {
     }
 }
 template <typename T>
-void merge_sort( T arr[], int n) {
+void merge_sort( T arr[], const int n) {
     merge_sort_helper(arr, 0, n - 1);
 }
 template <typename T>
@@ -146,13 +146,13 @@ void quick_sort_helper(T arr[], int low, int high) {
 
 }
 template <typename T>
-void quick_sort(T arr[], int n) {
+void quick_sort(T arr[], const int n) {
     quick_sort_helper(arr, 0, n - 1);
 }
 
 //------------------------------------------------------Implementation of insertion sort -------------------------------------------------
 template <typename T>
-void insertion_sort(T arr[], int n){
+void insertion_sort(T arr[], const int n){
     int key, j;
     for (int i = 1; i < n ; i++)
     {
@@ -176,7 +176,7 @@ void Swap(int&x, int&y) {
 
 //------------------------------------------------------Implementation of selection sort ------------------------------------------------
 template <typename T>
-void selection_sort(T arr[], int n){
+void selection_sort(T arr[], const int n){
     
     int i , j, min;
     for(i = 0; i < n; i++)
@@ -192,7 +192,7 @@ void selection_sort(T arr[], int n){
 
 //------------------------------------------------------Implementation of Bubble sort ------------------------------------------------
 template <typename T>
-void bubble_sort(T arr[], int n){
+void bubble_sort(T arr[], const int n){
     bool flag; //if true, array is sorted
     for (int i = 0; i < n-1; i++)
     {
